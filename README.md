@@ -1,14 +1,14 @@
-# dawei-cli
-![Npm 版本](https://img.shields.io/badge/dawei-cli_v0.0.1-green)
+# h_dawei_cli
+![Npm 版本](https://img.shields.io/badge/h_dawei_cli_v0.0.1-green)
 ## 📖简介
 - 用于快速搭建前端项目的命令行工具
 
 ## 📕模版
-- ✅快速生成[Vue3+TS+Vite+ElementPlus+Pinia+Axios+Mock的模版](https://github.com/Dreeze549/dawei-cli)
+- ✅快速生成[Vue3+TS+Vite+ElementPlus+Pinia+Axios+Mock的模版](https://github.com/Dreeze549/h_dawei_cli)
 
 ## 📦安装
 ``` bash
-npm install dawei-cli -g
+npm install h_dawei_cli -g
 ```
 
 ## 💯使用
@@ -23,3 +23,4 @@ dawei create [projectName]
 dawei -v
 dawei -version
 ```
+
