@@ -4,7 +4,7 @@
 - 用于快速搭建前端项目的命令行工具
 
 ## 📕模版
-- ✅快速生成Vue3+TS+Vite+ElementPlus+Pinia+Axios+Mock的模版
+- ✅快速生成[Vue3+TS+Vite+ElementPlus+Pinia+Axios+Mock的模版](https://github.com/Dreeze549/dawei-cli)
 
 ## 📦安装
 ``` bash
