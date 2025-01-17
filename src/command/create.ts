@@ -2,7 +2,6 @@ import { input, select } from "@inquirer/prompts"
 import { clone } from "../utils/clone"
 import path from "path"
 import fs from "fs-extra"
-import { fstat } from "fs-extra"
 
 export interface TemplateInfo {
     name: string, //模版名称

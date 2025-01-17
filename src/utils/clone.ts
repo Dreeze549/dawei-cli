@@ -1,5 +1,5 @@
 import simpleGit, { SimpleGitOptions } from "simple-git"
-const createLogger = require("progress-estimator")
+import createLogger from "progress-estimator"
 import chalk from "chalk"
 
 // 初始化进度条
@@ -22,7 +22,7 @@ export const clone = async (url: string, projectName: string, options: string[])
     const git = simpleGit(gitOptions);
     try {
         await logger(git.clone(url, projectName, options), "代码下载中...", {
-            estimated: 8000,//预估下载时间
+            estimate: 8000,//预估下载时间
         })
         console.log()
         console.log(chalk.blueBright(`==================================`))
