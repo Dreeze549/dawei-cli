@@ -1,6 +1,6 @@
 {
   "name": "h_dawei_cli",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "h_dawei_cli 脚手架",
   "main": "index.js",
   "scripts": {
@@ -14,10 +14,10 @@
     "Element-plus"
   ],
   "author": "dawei",
-  "bin":{
-    "dawei":"bin/index.js"
+  "bin": {
+    "dawei": "bin/index.js"
   },
-  "files":[
+  "files": [
     "dist",
     "bin",
     "README.md"
