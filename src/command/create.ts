@@ -2,6 +2,10 @@ import { input, select } from "@inquirer/prompts"
 import { clone } from "../utils/clone"
 import path from "path"
 import fs from "fs-extra"
+import { name, version } from "../../package.json"
+import axios, { AxiosResponse } from "axios"
+import { gt } from "lodash"
+import chalk from "chalk"
 
 export interface TemplateInfo {
     name: string, //模版名称
@@ -27,7 +31,8 @@ export const templates: Map<string, TemplateInfo> = new Map(
     ]
 )
 
-export function isOverwrite(fileName:string){
+// 检测文件是否存在
+export function isOverwrite(fileName: string) {
     console.warn(`文件 ${fileName} 已存在！`);
     return select({
         message: "是否覆盖?",
@@ -37,6 +42,35 @@ export function isOverwrite(fileName:string){
         ],
     })
 }
+
+export const getNpmInfo = async (npmName: string) => {
+    const npmUrl = `https://registry.npmjs.org/${name}`;
+    let res = {};
+    try {
+        res = await axios.get(npmUrl);
+    } catch (err) {
+        console.error(err);
+    }
+    return res;
+}
+
+export const getNpmLatestVersion = async (name: string) => {
+    const { data } = await getNpmInfo(name) as AxiosResponse;
+    return data["dist-tags"].latest;
+}
+
+// 检测是否版本更新
+export const checkVersion = async (name: string, version: string) => {
+    const latestVersion = await getNpmLatestVersion(name)
+    const need=gt(latestVersion,version)
+    if(need){
+        console.warn(`检测到h_dawei_cli最新版本:${chalk.blackBright(latestVersion)},当前版本是:${chalk.blackBright(version)}`)
+        console.log(`可使用:${chalk.yellow("npm install h_dawei_cli@latest")},或者使用:${chalk.yellow("h_dawei_cli update")}更新`);
+    }
+    return need;
+}
+
+
 
 export async function create(projectName?: string) {
     //初始化模版列表
@@ -54,14 +88,17 @@ export async function create(projectName?: string) {
 
     // 如果文件夹存储，则提升覆盖
     const filePath = path.resolve(process.cwd(), projectName);
-    if(fs.existsSync(filePath)){
+    if (fs.existsSync(filePath)) {
         const run = await isOverwrite(projectName)
-        if(run){
+        if (run) {
             await fs.remove(filePath);
-        }else{
+        } else {
             return;  //不覆盖直接结束
         }
     }
+
+    //检查版本更新
+    await checkVersion(name, version)
 
     const templateName = await select({
         message: "请选择模版",
